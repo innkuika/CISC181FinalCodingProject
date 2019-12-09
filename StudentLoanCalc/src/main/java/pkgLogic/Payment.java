@@ -1,9 +1,15 @@
 package pkgLogic;
 
-public class Payment {
+import java.util.Date;
+
+public class Payment extends Loan {
 	
 	//TODO: I've accounted for PaymentNbr, you need to add all the other fields for the class
 	private int PaymentNbr;
+	private double Interest;
+	private Date DueDate;
+	private double Principle;
+	private double Balance;
 
 	
 	//TODO: Fix the constructor, add the fields you've added.
