@@ -1,22 +1,59 @@
 package pkgLogic;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Payment extends Loan {
 	
-	//TODO: I've accounted for PaymentNbr, you need to add all the other fields for the class
+
 	private int PaymentNbr;
 	private double Interest;
-	private Date DueDate;
+	private Calendar DueDate;
 	private double Principle;
-	private double Balance;
+	private double Balance; //Beginning balance
 
 	
 	//TODO: Fix the constructor, add the fields you've added.
-	public Payment(int paymentNbr) {
+	public Payment(int paymentNbr, Calendar dueDate, double balance) {
 		super();
 		PaymentNbr = paymentNbr;
+		DueDate = dueDate;
+		Balance = balance;
+		Interest = Balance* this.getInterestRate()/12;
+		Principle = this.getPMT() - Interest+this.getAddPMT();	
 	}
+	
+	public double getInterest() {
+		return Interest;
+	}
+
+	public void setInterest(double interest) {
+		Interest = interest;
+	}
+
+	public Calendar getDueDate() {
+		return DueDate;
+	}
+
+	public void setDueDate(Calendar dueDate) {
+		DueDate = dueDate;
+	}
+
+	public double getPrinciple() {
+		return Principle;
+	}
+
+	public void setPrinciple(double principle) {
+		Principle = principle;
+	}
+
+	public double getBalance() {
+		return Balance;
+	}
+
+	public void setBalance(double balance) {
+		Balance = balance;
+	}	
 
 	public int getPaymentNbr() {
 		return PaymentNbr;
@@ -26,5 +63,5 @@ public class Payment extends Loan {
 		PaymentNbr = paymentNbr;
 	}
 	
-	//TODO: Add getters and setters for new fields.	
+
 }
