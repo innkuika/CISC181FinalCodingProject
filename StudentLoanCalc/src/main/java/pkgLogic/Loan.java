@@ -2,7 +2,7 @@ package pkgLogic;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import org.apache.poi.ss.formula.functions.*;
 
 public class Loan {
 
@@ -14,13 +14,17 @@ public class Loan {
 	private double LoanAmount;
 	private ArrayList<Payment> Payments;
 	
+	public Loan() {
+		
+	}
+	
 	public Loan(double interestRate,int term,Calendar firstPMTDate,double addPMT,double loanAmount) {
 		InterestRate = interestRate;
 		Term = term;
 		FirstPMTDate = firstPMTDate;
 		AddPMT = addPMT;
 		LoanAmount = loanAmount;
-		PMT = 0;
+		PMT = Math.abs(FinanceLib.pmt(InterestRate/12, Term*12, LoanAmount, 0, false));
 		Payments = autoPayments();
 		
 		
