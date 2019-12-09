@@ -41,9 +41,10 @@ public class Loan {
 		
 		payments.add(p1);
 		while((PMT + AddPMT) < p1.getBalance()) {
+			b = b - payments.get(i-1).getPrinciple() - AddPMT;
 			i += 1;
 			d.add(Calendar.MONTH, 1);
-			b = b - PMT - AddPMT;
+			
 			Payment p2 = new Payment(i,d,b);
 			payments.add(p2);
 			p1 = p2;

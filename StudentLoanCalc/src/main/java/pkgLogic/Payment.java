@@ -19,8 +19,8 @@ public class Payment extends Loan {
 		PaymentNbr = paymentNbr;
 		DueDate = dueDate;
 		Balance = balance;
-		Interest = Balance* this.getInterestRate()/12;
-		Principle = this.getPMT() - Interest+this.getAddPMT();	
+		Interest = Balance* super.getInterestRate()/12;
+		Principle = super.getPMT() - Interest + super.getAddPMT();	
 	}
 	
 	public double getInterest() {
