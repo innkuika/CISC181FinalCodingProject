@@ -14,9 +14,6 @@ public class Loan {
 	private double LoanAmount;
 	private ArrayList<Payment> Payments;
 	
-	public Loan() {
-		
-	}
 	
 	public Loan(double interestRate,int term,Calendar firstPMTDate,double addPMT,double loanAmount) {
 		InterestRate = interestRate;
@@ -25,10 +22,7 @@ public class Loan {
 		AddPMT = addPMT;
 		LoanAmount = loanAmount;
 		PMT = Math.abs(FinanceLib.pmt(InterestRate/12, Term*12, LoanAmount, 0, false));
-		Payments = autoPayments();
-		
-		
-		
+				
 	}
 	
 	public ArrayList<Payment> autoPayments(){
@@ -37,15 +31,15 @@ public class Loan {
 		double b = LoanAmount;
 		
 		ArrayList<Payment> payments = new ArrayList<Payment>();
-		Payment p1 = new Payment(i,d,b);
+		Payment p1 = new Payment(i,d,b,InterestRate, Term,FirstPMTDate,AddPMT,LoanAmount);
 		
 		payments.add(p1);
 		while((PMT + AddPMT) < p1.getBalance()) {
-			b = b - payments.get(i-1).getPrinciple() - AddPMT;
+			b = b - payments.get(i-1).getPrinciple();
 			i += 1;
 			d.add(Calendar.MONTH, 1);
 			
-			Payment p2 = new Payment(i,d,b);
+			Payment p2 = new Payment(i,d,b,InterestRate, Term,FirstPMTDate,AddPMT,LoanAmount);
 			payments.add(p2);
 			p1 = p2;
 		}

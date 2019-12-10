@@ -14,13 +14,13 @@ public class Payment extends Loan {
 
 	
 	//TODO: Fix the constructor, add the fields you've added.
-	public Payment(int paymentNbr, Calendar dueDate, double balance) {
-		super();
-		PaymentNbr = paymentNbr;
-		DueDate = dueDate;
-		Balance = balance;
-		Interest = Balance* super.getInterestRate()/12;
-		Principle = super.getPMT() - Interest + super.getAddPMT();	
+	public Payment(int paymentNbr, Calendar dueDate, double balance,double interestRate,int term,Calendar firstPMTDate,double addPMT,double loanAmount) {
+		super(interestRate, term,firstPMTDate, addPMT, loanAmount);
+		this.PaymentNbr = paymentNbr;
+		this.DueDate = dueDate;
+		this.Balance = balance;
+		this.Interest = balance* this.getInterestRate()/12;
+		this.Principle = super.getPMT() - balance* this.getInterestRate()/12 + super.getAddPMT();	
 	}
 	
 	public double getInterest() {
