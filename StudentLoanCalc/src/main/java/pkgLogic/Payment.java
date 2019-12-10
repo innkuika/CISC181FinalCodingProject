@@ -20,7 +20,10 @@ public class Payment extends Loan {
 		this.DueDate = dueDate;
 		this.Balance = balance;
 		this.Interest = balance* this.getInterestRate()/12;
-		this.Principle = super.getPMT() - balance* this.getInterestRate()/12 + super.getAddPMT();	
+		if((super.getPMT()+super.getAddPMT()) < balance)
+			this.Principle = super.getPMT() - balance* this.getInterestRate()/12 + super.getAddPMT();
+		else
+			this.Principle = balance - Interest + super.getAddPMT();
 	}
 	
 	public double getInterest() {
