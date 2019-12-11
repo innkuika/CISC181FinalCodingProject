@@ -39,7 +39,7 @@ public class Loan {
 			i += 1;
 			d.add(Calendar.MONTH, 1);
 			
-			Payment p2 = new Payment(i,d,b,InterestRate, Term,FirstPMTDate,AddPMT,LoanAmount);
+			Payment p2 = new Payment(i,d,b,InterestRate, Term, FirstPMTDate, AddPMT, LoanAmount);
 			payments.add(p2);
 			p1 = p2;
 		}
