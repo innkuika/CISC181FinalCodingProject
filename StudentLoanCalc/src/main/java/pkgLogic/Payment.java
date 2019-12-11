@@ -11,11 +11,16 @@ public class Payment extends Loan {
 	private Calendar DueDate;
 	private double Principle;
 	private double Balance; //Beginning balance
+	private double PMT;
+	private double AddPMT;
+	
 
 	
 	//TODO: Fix the constructor, add the fields you've added.
 	public Payment(int paymentNbr, Calendar dueDate, double balance,double interestRate,int term,Calendar firstPMTDate,double addPMT,double loanAmount) {
 		super(interestRate, term,firstPMTDate, addPMT, loanAmount);
+		this.PMT = super.getPMT();
+		this.AddPMT = super.getAddPMT();
 		this.PaymentNbr = paymentNbr;
 		this.DueDate = dueDate;
 		this.Balance = balance;

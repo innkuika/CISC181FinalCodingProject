@@ -55,6 +55,9 @@ public class LoanCalcViewController implements Initializable {
 
 	@FXML
 	private Label lblTotalPayemnts;
+	
+	@FXML
+	private Label lblTotalInterest;
 
 	@FXML
 	private TableView<Payment> tvResults;
@@ -72,15 +75,15 @@ public class LoanCalcViewController implements Initializable {
 	private TableColumn<Payment, Double> colBalance;
 
 	@FXML
-	private TableColumn<Loan, Double> colPMT;
+	private TableColumn<Payment, Double> colPMT;
 
 	@FXML
-	private TableColumn<Loan, Double> colAddPMT;
+	private TableColumn<Payment, Double> colAddPMT;
 
 	@FXML
 	private TableColumn<Payment, Calendar> colDueDate;
 
-	private ObservableList<Payment> paymentList;
+	private ObservableList<Payment> paymentList = FXCollections.observableArrayList();;
 
 	// TODO: Account for all the other columns
 	@Override
@@ -94,10 +97,6 @@ public class LoanCalcViewController implements Initializable {
 		colAddPMT.setCellValueFactory(new PropertyValueFactory<>("AddPMT"));
 		colDueDate.setCellValueFactory(new PropertyValueFactory<>("DueDate"));
 
-		// TODO: Add a 'setCellValueFactor' entry for each column, mapping to each
-		// attribute in Payment
-
-		tvResults.setItems(paymentList);
 	}
 
 	public void setMainApp(StudentCalc sc) {
@@ -114,13 +113,13 @@ public class LoanCalcViewController implements Initializable {
 	private void btnCalcLoan(ActionEvent event) {
 
 		// Examples- how to read data from the form
-		//vResults.getItems().clear();
+		tvResults.getItems().clear();
 		
-		Stage stage = (Stage) tvResults.getScene().getWindow();
+		//Stage stage = (Stage) tvResults.getScene().getWindow();
 
 		double dLoanAmount = Double.parseDouble(LoanAmount.getText());
-		double dAddPMT = Double.parseDouble(LoanAmount.getText());
-		double dInterestRate = Double.parseDouble(AddPMT.getText());
+		double dAddPMT = Double.parseDouble(AddPMT.getText());
+		double dInterestRate = Double.parseDouble(InterestRate.getText());
 		int iTerm = Integer.parseInt(NbrOfYears.getText());
 		LocalDate localDate = PaymentStartDate.getValue();		
 		Calendar c = (Calendar) Calendar.getInstance();
@@ -128,43 +127,24 @@ public class LoanCalcViewController implements Initializable {
 		c.set(Calendar.YEAR, localDate.getYear());
 		c.set(Calendar.DAY_OF_MONTH, localDate.getDayOfMonth());
 
-		//lblTotalPayemnts.setText("123");
-		tvResults.getColumns().setAll(colInterest);
+		
+		tvResults.getColumns().setAll(colPaymentNumber,colDueDate,colPMT,colAddPMT,colInterest,colPrinciple,colBalance);
+
 
 		Loan loan = new Loan(dInterestRate, iTerm, c, dAddPMT, dLoanAmount);
-		ArrayList<Payment> payments = loan.autoPayments();
-		paymentList= FXCollections.observableArrayList(payments);
-
-		  Callback<TableColumn<Payment, Double>, TableCell<Payment, Double>>
-          cellFactoryForMap = new Callback<TableColumn<Payment, Double>, TableCell<Payment, Double>>() {
-                  @Override
-                  public TableCell call(TableColumn p) {
-                      return new TextFieldTableCell(new StringConverter() {
-                          @Override
-                          public String toString(Object t) {
-                              return t.toString();
-                          }
-                          @Override
-                          public Object fromString(String string) {
-                              return string;
-                          }                                    
-                      });
-                  }
-      };
-		colInterest.setCellFactory(cellFactoryForMap);
+		loan.setPayments(loan.autoPayments());
+		
+		ArrayList<Payment> pmt = loan.autoPayments();
+		
+		lblTotalPayemnts.setText(Integer.toString(pmt.size()));
+		lblTotalInterest.setText(Double.toString(loan.totalInterest(pmt)));
+				
+		paymentList= FXCollections.observableArrayList(loan.getPayments());
+		
+		tvResults.setItems(paymentList);
+		
 
 
-		final VBox vbox = new VBox();
-
-		vbox.setSpacing(5);
-		vbox.setPadding(new Insets(10, 0, 0, 10));
-		Scene scene = new Scene(new Group());
-		((Group) scene.getRoot()).getChildren().addAll(vbox);
-
-		stage.setScene(scene);
-
-		stage.show();
-		// paymentList = FXCollections.observableArrayList(a);
 
 		/*
 		 * When this button is clicked, you need to do the following:

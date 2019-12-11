@@ -75,6 +75,7 @@
 								<Label text="Total Payments" />
 								<Label text="Total Interest" GridPane.rowIndex="1" />
 								<Label fx:id="lblTotalPayemnts" prefHeight="18.0" prefWidth="174.0" GridPane.columnIndex="1" />
+                        <Label fx:id="lblTotalInterest" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 							</children>
 						</GridPane>
 					</children>

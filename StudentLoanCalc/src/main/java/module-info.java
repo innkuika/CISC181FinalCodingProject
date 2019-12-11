@@ -7,6 +7,8 @@ module StudentLoanCalc {
 	requires javafx.fxml;
 	requires javafx.media;
 	requires poi;
+	
+	opens pkgLogic;
 
 	opens app.controller to javafx.fxml;
 }

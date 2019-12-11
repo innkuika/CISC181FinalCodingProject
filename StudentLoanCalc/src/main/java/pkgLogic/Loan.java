@@ -25,6 +25,12 @@ public class Loan {
 				
 	}
 	
+	public double totalInterest(ArrayList<Payment> pmt) {
+		double sum = 0;
+		for(Payment p :pmt) sum += p.getInterest();	
+		return sum;
+	}
+	
 	public ArrayList<Payment> autoPayments(){
 		int i = 1;
 		Calendar d = FirstPMTDate;
