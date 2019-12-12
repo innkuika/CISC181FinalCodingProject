@@ -3,17 +3,10 @@ package app.controller;
 import app.StudentCalc;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import javafx.util.StringConverter;
 import pkgLogic.Loan;
 import pkgLogic.Payment;
 
@@ -21,17 +14,11 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 
 public class LoanCalcViewController implements Initializable {
@@ -111,9 +98,11 @@ public class LoanCalcViewController implements Initializable {
 	 */
 	@FXML
 	private void btnCalcLoan(ActionEvent event) {
-
-		// Examples- how to read data from the form
+		
 		tvResults.getItems().clear();
+		lblTotalPayemnts.setText("");
+		lblTotalInterest.setText("");
+		
 		
 		//Stage stage = (Stage) tvResults.getScene().getWindow();
 
@@ -134,10 +123,8 @@ public class LoanCalcViewController implements Initializable {
 		Loan loan = new Loan(dInterestRate, iTerm, c, dAddPMT, dLoanAmount);
 		loan.setPayments(loan.autoPayments());
 		
-		ArrayList<Payment> pmt = loan.autoPayments();
-		
-		lblTotalPayemnts.setText(Integer.toString(pmt.size()));
-		lblTotalInterest.setText(Double.toString(loan.totalInterest(pmt)));
+		lblTotalPayemnts.setText(Integer.toString(loan.getPayments().size()));
+		lblTotalInterest.setText(Double.toString(loan.totalInterest(loan.getPayments())));
 				
 		paymentList= FXCollections.observableArrayList(loan.getPayments());
 		
