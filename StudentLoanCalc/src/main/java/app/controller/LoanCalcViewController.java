@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -83,6 +84,8 @@ public class LoanCalcViewController implements Initializable {
 		colPMT.setCellValueFactory(new PropertyValueFactory<>("PMT"));
 		colAddPMT.setCellValueFactory(new PropertyValueFactory<>("AddPMT"));
 		colDueDate.setCellValueFactory(new PropertyValueFactory<>("DueDate"));
+		
+
 
 	}
 
@@ -130,21 +133,6 @@ public class LoanCalcViewController implements Initializable {
 		
 		tvResults.setItems(paymentList);
 		
-
-
-
-		/*
-		 * When this button is clicked, you need to do the following:
-		 * 
-		 * 1) Clear the table 2) Clear the results fields (Total Payments, Total
-		 * Interest) 3) You're going to create 'n' payments based on the data you give.
-		 * You'll calculate and carry forward 'balance', because you're going to have to
-		 * hand calculate that month's interest. Payment# - you'll set this, counting
-		 * from 1 to N Due Date - based on the given date. method .plusMonths(1) will
-		 * calculate date + 1 month. Payment - Calculate based on PMT function (which is
-		 * your minimum payment) Additional Payment - based on Additional Payment given
-		 * by user Interest - Calculate based on
-		 */
 
 	}
 
