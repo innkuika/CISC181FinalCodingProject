@@ -1,5 +1,6 @@
 package pkgLogic;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,16 +9,14 @@ public class Payment extends Loan {
 
 	private int PaymentNbr;
 	private double Interest;
-	private Calendar DueDate;
+	private LocalDate DueDate;
 	private double Principle;
 	private double Balance; //Beginning balance
 	private double PMT;
 	private double AddPMT;
 	
 
-	
-	//TODO: Fix the constructor, add the fields you've added.
-	public Payment(int paymentNbr, Calendar dueDate, double balance,double interestRate,int term,Calendar firstPMTDate,double addPMT,double loanAmount) {
+	public Payment(int paymentNbr, LocalDate dueDate, double balance,double interestRate,int term,LocalDate firstPMTDate,double addPMT,double loanAmount) {
 		super(interestRate, term,firstPMTDate, addPMT, loanAmount);
 		this.PMT = super.getPMT();
 		this.AddPMT = super.getAddPMT();
@@ -39,11 +38,11 @@ public class Payment extends Loan {
 		Interest = interest;
 	}
 
-	public Calendar getDueDate() {
+	public LocalDate getDueDate() {
 		return DueDate;
 	}
 
-	public void setDueDate(Calendar dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		DueDate = dueDate;
 	}
 

@@ -2,6 +2,7 @@ package pkgUT;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 import org.apache.poi.ss.formula.functions.FinanceLib;
@@ -19,8 +20,7 @@ public class Test1 {
 
 		double apmt = 0;
 
-		Calendar c = Calendar.getInstance();
-		c.set(19, 12, 9);
+		LocalDate c = LocalDate.of(19, 12, 9);
 
 		Loan l = new Loan(r, n, c, apmt, p);
 		l.setPayments(l.autoPayments());
@@ -77,8 +77,7 @@ public class Test1 {
 
 		double apmt = 100;
 
-		Calendar c = Calendar.getInstance();
-		c.set(19, 12, 9);
+		LocalDate c = LocalDate.of(19, 12, 9);
 
 		Loan l = new Loan(r, n, c, apmt, p);
 		l.setPayments(l.autoPayments());

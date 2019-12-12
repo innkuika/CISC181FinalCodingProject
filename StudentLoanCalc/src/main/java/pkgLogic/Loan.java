@@ -1,5 +1,6 @@
 package pkgLogic;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import org.apache.poi.ss.formula.functions.*;
@@ -9,13 +10,13 @@ public class Loan {
 	private double InterestRate;
 	private double PMT; 
 	private int Term;
-	private Calendar FirstPMTDate;
+	private LocalDate FirstPMTDate;
 	private double AddPMT;
 	private double LoanAmount;
 	private ArrayList<Payment> Payments;
 	
 	
-	public Loan(double interestRate,int term,Calendar firstPMTDate,double addPMT,double loanAmount) {
+	public Loan(double interestRate,int term,LocalDate firstPMTDate,double addPMT,double loanAmount) {
 		InterestRate = interestRate;
 		Term = term;
 		FirstPMTDate = firstPMTDate;
@@ -33,7 +34,7 @@ public class Loan {
 	
 	public ArrayList<Payment> autoPayments(){
 		int i = 1;
-		Calendar d = FirstPMTDate;
+		LocalDate d = FirstPMTDate;
 		double b = LoanAmount;
 		
 		ArrayList<Payment> payments = new ArrayList<Payment>();
@@ -43,7 +44,7 @@ public class Loan {
 		while((PMT + AddPMT) < p1.getBalance()) {
 			b = b - payments.get(i-1).getPrinciple();
 			i += 1;
-			d.add(Calendar.MONTH, 1);
+			d = d.plusMonths(1);
 			
 			Payment p2 = new Payment(i,d,b,InterestRate, Term, FirstPMTDate, AddPMT, LoanAmount);
 			payments.add(p2);
@@ -74,10 +75,10 @@ public class Loan {
 	public void setTerm(int term) {
 		Term = term;
 	}
-	public Calendar getFirstPMTDate() {
+	public LocalDate getFirstPMTDate() {
 		return FirstPMTDate;
 	}
-	public void setFirstPMTDate(Calendar firstPMTDate) {
+	public void setFirstPMTDate(LocalDate firstPMTDate) {
 		FirstPMTDate = firstPMTDate;
 	}
 	public double getAddPMT() {

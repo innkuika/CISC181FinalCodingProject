@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import pkgLogic.Loan;
 
 public class StudentCalc extends Application {
 
@@ -37,7 +38,11 @@ public class StudentCalc extends Application {
 					.getResource("/app/view/LoanCalcView.fxml"));
 			LoanScreen = (BorderPane) loader.load();
 			Scene scene = new Scene(LoanScreen);
+			
 			primaryStage.setScene(scene);
+			
+			//scene.getStylesheets().add("/src/main/resources/stylesheet.css");
+			scene.getStylesheets().add(getClass().getResource("/app/view/stylesheet.css").toExternalForm());
 			LCVC = loader.getController();
 			LCVC.setMainApp(this);
 			primaryStage.show();

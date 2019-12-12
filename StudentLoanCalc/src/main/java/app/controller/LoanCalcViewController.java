@@ -20,6 +20,8 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 
 public class LoanCalcViewController implements Initializable {
@@ -43,7 +45,7 @@ public class LoanCalcViewController implements Initializable {
 
 	@FXML
 	private Label lblTotalPayemnts;
-	
+
 	@FXML
 	private Label lblTotalInterest;
 
@@ -73,10 +75,9 @@ public class LoanCalcViewController implements Initializable {
 
 	private ObservableList<Payment> paymentList = FXCollections.observableArrayList();;
 
-	// TODO: Account for all the other columns
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("PaymentNbr"));
 		colInterest.setCellValueFactory(new PropertyValueFactory<>("Interest"));
 		colPrinciple.setCellValueFactory(new PropertyValueFactory<>("Principle"));
@@ -84,8 +85,6 @@ public class LoanCalcViewController implements Initializable {
 		colPMT.setCellValueFactory(new PropertyValueFactory<>("PMT"));
 		colAddPMT.setCellValueFactory(new PropertyValueFactory<>("AddPMT"));
 		colDueDate.setCellValueFactory(new PropertyValueFactory<>("DueDate"));
-		
-
 
 	}
 
@@ -101,38 +100,29 @@ public class LoanCalcViewController implements Initializable {
 	 */
 	@FXML
 	private void btnCalcLoan(ActionEvent event) {
-		
+
 		tvResults.getItems().clear();
 		lblTotalPayemnts.setText("");
 		lblTotalInterest.setText("");
-		
-		
-		//Stage stage = (Stage) tvResults.getScene().getWindow();
 
 		double dLoanAmount = Double.parseDouble(LoanAmount.getText());
 		double dAddPMT = Double.parseDouble(AddPMT.getText());
 		double dInterestRate = Double.parseDouble(InterestRate.getText());
 		int iTerm = Integer.parseInt(NbrOfYears.getText());
-		LocalDate localDate = PaymentStartDate.getValue();		
-		Calendar c = (Calendar) Calendar.getInstance();
-		c.set(Calendar.MONTH, localDate.getMonthValue());
-		c.set(Calendar.YEAR, localDate.getYear());
-		c.set(Calendar.DAY_OF_MONTH, localDate.getDayOfMonth());
+		LocalDate localDate = PaymentStartDate.getValue();
 
-		
-		tvResults.getColumns().setAll(colPaymentNumber,colDueDate,colPMT,colAddPMT,colInterest,colPrinciple,colBalance);
+		tvResults.getColumns().setAll(colPaymentNumber, colDueDate, colPMT, colAddPMT, colInterest, colPrinciple,
+				colBalance);
 
-
-		Loan loan = new Loan(dInterestRate, iTerm, c, dAddPMT, dLoanAmount);
+		Loan loan = new Loan(dInterestRate, iTerm, localDate, dAddPMT, dLoanAmount);
 		loan.setPayments(loan.autoPayments());
-		
+
 		lblTotalPayemnts.setText(Integer.toString(loan.getPayments().size()));
 		lblTotalInterest.setText(Double.toString(loan.totalInterest(loan.getPayments())));
-				
-		paymentList= FXCollections.observableArrayList(loan.getPayments());
-		
+
+		paymentList = FXCollections.observableArrayList(loan.getPayments());
+
 		tvResults.setItems(paymentList);
-		
 
 	}
 
