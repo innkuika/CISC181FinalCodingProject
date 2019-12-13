@@ -14,11 +14,11 @@ public class Test1 {
 	@Test
 	public void TestLoanWithoutAddPMT() {
 
-		double r = 0.04;
+		double r = 0.04; //interest rate
 		int n = 1;
-		double p = 5000;
+		double p = 5000; //loan amount
 
-		double apmt = 0;
+		double apmt = 0; //additional payment
 
 		LocalDate c = LocalDate.of(19, 12, 9);
 
@@ -75,7 +75,7 @@ public class Test1 {
 		int n = 1;
 		double p = 5000;
 
-		double apmt = 100;
+		double apmt = 100; //additional payment
 
 		LocalDate c = LocalDate.of(19, 12, 9);
 

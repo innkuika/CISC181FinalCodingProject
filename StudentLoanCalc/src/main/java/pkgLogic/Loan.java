@@ -32,9 +32,9 @@ public class Loan {
 	}
 	
 	public ArrayList<Payment> autoPayments(){
-		int i = 1;
-		LocalDate d = FirstPMTDate;
-		double b = LoanAmount;
+		int i = 1; //payment number counter
+		LocalDate d = FirstPMTDate; //Due date
+		double b = LoanAmount; //balance
 		
 		ArrayList<Payment> payments = new ArrayList<Payment>();
 		Payment p1 = new Payment(i,d,b,InterestRate, Term,FirstPMTDate,AddPMT,LoanAmount);

@@ -12,7 +12,9 @@ public class Payment extends Loan {
 	private LocalDate DueDate;
 	private double Principle;
 	private double Balance; //Beginning balance
-	private double PMT;
+	
+	//I'm adding these two attributes here bc the setAll() function in LoanCalcViewCon seems only working with Payment attributes
+	private double PMT; 
 	private double AddPMT;
 	
 
