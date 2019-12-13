@@ -115,7 +115,7 @@ public class LoanCalcViewController implements Initializable {
 				colBalance);
 
 		Loan loan = new Loan(dInterestRate, iTerm, localDate, dAddPMT, dLoanAmount);
-		loan.setPayments(loan.autoPayments());
+		loan.autoPayments();
 
 		lblTotalPayemnts.setText(Integer.toString(loan.getPayments().size()));
 		lblTotalInterest.setText(Double.toString(loan.totalInterest(loan.getPayments())));

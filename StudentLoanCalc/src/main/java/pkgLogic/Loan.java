@@ -22,8 +22,7 @@ public class Loan {
 		FirstPMTDate = firstPMTDate;
 		AddPMT = addPMT;
 		LoanAmount = loanAmount;
-		PMT = Math.abs(FinanceLib.pmt(InterestRate/12, Term*12, LoanAmount, 0, false));
-				
+		PMT = Math.abs(FinanceLib.pmt(InterestRate/12, Term*12, LoanAmount, 0, false));	
 	}
 	
 	public double totalInterest(ArrayList<Payment> pmt) {
@@ -50,7 +49,7 @@ public class Loan {
 			payments.add(p2);
 			p1 = p2;
 		}
-		
+		this.setPayments(payments);
 		return payments;
 	}
 	
