@@ -1,9 +1,9 @@
 .background {
-    -fx-background-color: #E5E5E5;
+    -fx-background-color: #000000;
 }
 
 .root{
-	-fx-background-color: #4B6164;
+	-fx-background-color: #000000;
 }
 .button 
 {
@@ -25,15 +25,15 @@
 }
 
 .text-field {
-    -fx-font-size: 12pt;
+    -fx-font-size: 10pt;
     -fx-font-family: "arial";
 }
 
 .table-view {
-	-fx-text-fill: #E5E5E5;
-    -fx-base: #638FA9;
-    -fx-control-inner-background: #638FA9;
-    -fx-background-color: #638FA9;
+	-fx-text-fill: #000000;
+    -fx-base: #000000;
+    -fx-control-inner-background: #000000;
+    -fx-background-color: #000000;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
